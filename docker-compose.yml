@@ -1,0 +1,19 @@
+services:
+  orchestrator:
+    build: .
+    ports:
+      - '8000:8000'
+    volumes:
+      - ./agents:/app/agents
+  audit-worker:
+    build: ./services/worker
+    deploy:
+      mode: replicated
+      replicas: 5
+    environment:
+      - JWT_SECRET=changeme
+    secrets:
+      - security-key
+secrets:
+  security-key:
+    file: ./secrets/audit-worker.key
