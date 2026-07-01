@@ -15,6 +15,8 @@ async def run_audit(audit_id: str, tasks: list) -> list:
         raise
     except Exception as e:
         # Handle any exceptions that occur during audit execution
+        logger = logging.getLogger(__name__)
+        logger.error(f"Error executing audit: {e}")
         raise
 
 def validate_agent_task(task: AgentTask) -> None:
