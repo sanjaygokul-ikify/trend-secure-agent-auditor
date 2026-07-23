@@ -1,6 +1,7 @@
 import asyncio
 from ..core.engine import run_audit
 from ..core.types import AgentTask
+import logging
 
 async def run_audit(audit_id: str, tasks: list) -> list:
     try:
@@ -12,6 +13,8 @@ async def run_audit(audit_id: str, tasks: list) -> list:
         return results
     except asyncio.TimeoutError:
         # Handle the timeout error
+        logger = logging.getLogger(__name__)
+        logger.error("Timeout error occurred during audit execution")
         raise
     except Exception as e:
         # Handle any exceptions that occur during audit execution
