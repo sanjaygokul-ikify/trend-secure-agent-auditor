@@ -44,13 +44,3 @@ def validate_agent_task(task: AgentTask) -> None:
         raise InvalidAgentTaskError("Task ID is required")
     if not task.agent_id:
         raise InvalidAgentTaskError("Agent ID is required")
-
-async def main():
-    # Example usage of the run_audit function
-    audit_id = "example-audit"
-    tasks = [
-        AgentTask(task_id="task-1", agent_id="agent-1"),
-        AgentTask(task_id="task-2", agent_id="agent-2")
-    ]
-    results = await run_audit(audit_id, tasks)
-    logger.info(f"Audit results: {json.dumps([result.__dict__ for result in results], indent=4)}")
